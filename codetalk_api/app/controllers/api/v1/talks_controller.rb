@@ -1,5 +1,6 @@
 class Api::V1::TalksController < ApplicationController
     before_action :current_user, only: [:create, :update, :destroy]
+    skip_before_action :verify_authenticity_token
 
     def index
         logger.info 'talks#index'
@@ -16,13 +17,21 @@ class Api::V1::TalksController < ApplicationController
             logger.warn "save error"
         end
     end
-
+    
     def update
-    
+        logger.info "tasks#update"
     end
-
-    def destroy
     
+    def destroy
+        logger.info "tasks#destroy"
+        logger.info params
+        @talk = Talk.find_by(id: params['id'])
+        if !@talk.nil?
+            @talk.destroy
+            render :json => { action: "destroy", status: "success" }
+        else
+            render :json => { action: "destroy", status: "failed", message: "talk not found" }
+        end
     end
 
     private
