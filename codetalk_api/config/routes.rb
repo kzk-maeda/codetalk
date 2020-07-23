@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     scope :v1 do
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
         registrations: 'api/v1/auth/registrations'
-      }      
+      }
+      get "talks", :to=>"v1/talk/talks#index"
     end
   end
 end
