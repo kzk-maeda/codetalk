@@ -1,0 +1,1 @@
+json.array! @talks, :id, :lang, :lang_version, :code, :result, :created_at, :updated_at
