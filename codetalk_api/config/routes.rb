@@ -7,7 +7,8 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for 'User', at: 'auth', controllers: {
         registrations: 'api/v1/auth/registrations'
       }
-      get "talks", :to=>"talk/talks#index"
+      # routes for talks controller
+      resources :talks, only: [:index, :create, :update, :destroy]
     end
   end
 end
